@@ -13,11 +13,23 @@ export default /** @type import('electron-builder').Configuration */
   linux: {
     target: ['deb'],
   },
+  mac: {
+    category: 'public.app-category.utilities',
+    icon: 'buildResources/icon.icns',
+    target: ['default'],
+  },
   /**
    * It is recommended to avoid using non-standard characters such as spaces in artifact names,
    * as they can unpredictably change during deployment, making them impossible to locate and download for update.
    */
   artifactName: '${productName}-${version}-${os}-${arch}.${ext}',
+  /**
+   * DMG 作成時に APFS を使うと hdiutil で失敗するケースがあるため、旧来の HFS+ 形式(UDZO)を指定
+   * することで失敗を回避するための設定を追加
+   */
+  dmg: {
+    format: 'UDZO'
+  },
   files: [
     'LICENSE*',
     'packages/entry-point.js',
@@ -62,7 +74,7 @@ export default /** @type import('electron-builder').Configuration */
  * {
  *   "name": "package-a",
  *   "files": [
- *     "dist/**\/"
+ *     "dist/**"
  *   ]
  * }
  * ```
