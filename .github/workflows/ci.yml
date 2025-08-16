@@ -53,7 +53,7 @@ jobs:
       attestations: write
     uses: ./.github/workflows/compile-and-test.yml
     with:
-      renderer-template: ${{ inputs.renderer-template }}
+      renderer-template: 'react'
       app-version: ${{ needs.prepare.outputs.APP_FULL_VERSION }}
       distribution-channel: ${{inputs.distribution-channel}}
 
